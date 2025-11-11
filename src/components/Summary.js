@@ -35,16 +35,16 @@ const COLORS = ['#FF8042', '#00C49F', '#0088FE'];
     <>
       <h2 className="text-center pt-5 mb-5 text-info-emphasis">Summary & Transaction</h2>
       <div className="container ">
-        <div className="row text-center justify-content-between">
-          <div className="col-4 card shadow-lg p-5">
+        <div className="row  g-3 text-center justify-content-between">
+          <div className="col-12 col-sm-6 col-lg-4  card shadow-lg p-5">
             <h5 className='text-info-emphasis'>Total Expenses</h5>
             <div>{totalExpense}</div>
           </div>
-          <div className="col-4 card shadow-lg p-5">
+          <div className="col-12 col-sm-6 col-lg-4 card shadow-lg p-5">
             <h5 className='text-info-emphasis'>Total Income</h5>
             <div>{totalIncome}</div>
           </div>
-          <div className="col-4 card shadow-lg p-5">
+          <div className="col-12 col-sm-6 col-lg-4 card shadow-lg p-5">
             <h5 className='text-info-emphasis'>Remaining</h5>
             <div>{remaining}</div>
           </div>

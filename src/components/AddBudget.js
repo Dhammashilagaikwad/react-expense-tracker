@@ -30,7 +30,7 @@ export default function AddBudget() {
   };
 
   return (
-   <div className="  container ">
+   <div className="  container col-12 col-md-6">
      <div className="card p-3 mt-4">
       <h4 className="text-info-emphasis"> Set Monthly Budget</h4>
       <form onSubmit={handleSubmit(onSubmit)}>

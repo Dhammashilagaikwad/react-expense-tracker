@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+
 import { set, useForm } from "react-hook-form"
-import Summary from './Summary';
 import { toast } from "react-toastify";
 
 export default function AddIncomeForm() {

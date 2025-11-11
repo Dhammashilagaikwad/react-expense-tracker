@@ -30,7 +30,8 @@ export default function TransactionList() {
             {transactions.length == 0 ? (
                 <p>No Expenses Record yet</p>
             ) : (
-                <table className='table table-striped'>
+              <div className='container'>
+                  <table className='table table-striped'>
                     <thead>
                         <tr>
                             <th className='text-info-emphasis'>Type</th>
@@ -54,6 +55,7 @@ export default function TransactionList() {
                         }
                     </tbody>
                 </table>
+              </div>
             )}
         </>
     )

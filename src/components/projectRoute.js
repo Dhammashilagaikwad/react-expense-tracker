@@ -9,6 +9,7 @@ var projectRoute = (
     <BrowserRouter>
         <Routes>
             <Route path="" element={<App />}>
+             <Route index element={<AddExpenseForm />} />
                 <Route path="/add-transaction" element={<AddExpenseForm />} />
                 <Route path="/add-budget" element={<AddBudget />} />
                 <Route path="/budget-management" element={<Summary />} />
