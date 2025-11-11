@@ -1,9 +1,9 @@
 
-import { set, useForm } from "react-hook-form"
+import {  useForm } from "react-hook-form"
 import { toast } from "react-toastify";
 
 export default function AddIncomeForm() {
-    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit,  reset, formState: { errors } } = useForm();
 
     const onSubmit  = (data => {
                     console.log("Income Added", data);

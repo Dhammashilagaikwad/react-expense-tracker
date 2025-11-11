@@ -27,7 +27,7 @@ export default function TransactionList() {
             <h3 className='text-center text-info-emphasis pt-5 pb-3'>Transaction List</h3>
 
 
-            {transactions.length == 0 ? (
+            {transactions.length === 0 ? (
                 <p>No Expenses Record yet</p>
             ) : (
               <div className='container'>
