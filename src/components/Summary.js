@@ -1,54 +1,85 @@
 import React, { useEffect, useState } from 'react';
-import { PieChart,  Pie,
+import {
+  PieChart,
+  Pie,
   Cell,
   Tooltip,
   Legend,
   ResponsiveContainer,
- } from 'recharts';
+} from 'recharts';
 
 export default function Summary() {
   const [totalExpense, setTotalExpense] = useState(0);
   const [totalIncome, setTotalIncome] = useState(0);
+  const [budget, setBudget] = useState(0); 
 
   useEffect(() => {
     const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
     const income = JSON.parse(localStorage.getItem('income')) || [];
-    
+    const budgets = JSON.parse(localStorage.getItem('monthlyBudget')) || {}; 
 
-    const totalExp = expenses.reduce((sum, e) => sum + parseInt(e.Amount), 0);
-    const totalInc = income.reduce((sum, i) => sum + parseInt(i.Amount), 0);
+    const totalExp = expenses.reduce((sum, e) => sum + parseInt(e.Amount || 0), 0);
+    const totalInc = income.reduce((sum, i) => sum + parseInt(i.Amount || 0), 0);
 
     setTotalExpense(totalExp);
     setTotalIncome(totalInc);
+
+  
+    const today = new Date();
+    const monthKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}`;
+    const monthlyBudget = budgets[monthKey] || 0;
+
+    setBudget(monthlyBudget);
   }, []);
+
   const remaining = totalIncome - totalExpense;
 
+ 
   const pieData = [
-    {name:'Expenses', value: totalExpense},
-    {name:'Income', value: totalIncome},
-    {name:'Remaining', value: remaining}
-  ]
+    { name: 'Expenses', value: totalExpense },
+    { name: 'Income', value: totalIncome },
+    { name: 'Remaining', value: remaining },
+    { name: 'Budget', value: budget },
+  ];
 
-const COLORS = ['#FF8042', '#00C49F', '#0088FE'];
+  const COLORS = ['#FF8042', '#00C49F', '#0088FE', '#FFBB28'];
 
   return (
     <>
-      <h2 className="text-center pt-5 mb-5 text-info-emphasis">Summary & Transaction</h2>
-      <div className="container ">
-        <div className="row  g-3 text-center justify-content-between">
-          <div className="col-12 col-sm-6 col-lg-4  card shadow-lg p-5">
-            <h5 className='text-info-emphasis'>Total Expenses</h5>
+      <h2 className="text-center pt-5 mb-5 text-info-emphasis">
+        Summary & Transaction
+      </h2>
+
+      <div className="container">
+        <div className="row g-3 text-center justify-content-between">
+          <div className="col-12 col-sm-6 col-lg-3 card shadow-lg p-4">
+            <h5 className="text-info-emphasis">Total Expenses</h5>
             <div>{totalExpense}</div>
           </div>
-          <div className="col-12 col-sm-6 col-lg-4 card shadow-lg p-5">
-            <h5 className='text-info-emphasis'>Total Income</h5>
+
+          <div className="col-12 col-sm-6 col-lg-3 card shadow-lg p-4">
+            <h5 className="text-info-emphasis">Total Income</h5>
             <div>{totalIncome}</div>
           </div>
-          <div className="col-12 col-sm-6 col-lg-4 card shadow-lg p-5">
-            <h5 className='text-info-emphasis'>Remaining</h5>
+
+          <div className="col-12 col-sm-6 col-lg-3 card shadow-lg p-4">
+            <h5 className="text-info-emphasis">Remaining</h5>
             <div>{remaining}</div>
           </div>
+
+          <div className="col-12 col-sm-6 col-lg-3 card shadow-lg p-4">
+            <h5 className="text-info-emphasis">Monthly Budget</h5>
+            <div>{budget}</div>
+          </div>
         </div>
+
+       
+        {totalExpense > budget && (
+          <div className="alert alert-danger mt-4 text-center">
+            ⚠️ You have exceeded your budget by ₹{totalExpense - budget}
+          </div>
+        )}
+
         <div className="row justify-content-center mt-5">
           <div className="col-md-6">
             <h5 className="text-center mb-3">Expense vs Remaining</h5>
